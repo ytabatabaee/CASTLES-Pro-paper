@@ -16,25 +16,24 @@ def main(args):
         for i in range(len(tns)):
             for j in range(i + 1, len(tns)):
                 try:
-                   dist_mat[i][j][idx2] = pdc(tns[i], tns[j])
-                   dist_mat[j][i][idx2] = dist_mat[i][j][idx2]
-                   if dist_mat[j][i][idx2] != 0:
+                   dist_mat[i][j][idx2] = dist_mat[j][i][idx2] = pdc(tns[i], tns[j])
+                   if dist_mat[j][i][idx2] != 0: # excluding gene trees with all zero branches
                        exclude = False
                 except:
-                   dist_mat[i][j][idx2] = dist_mat[i][j][idx2] = None # this may not be right
+                   dist_mat[i][j][idx2] = dist_mat[j][i][idx2] = None # missing taxa pair in a gene tree
         if exclude:
             continue
         else:
             idx2 += 1
 
+    # missing data imputation with mean
     dist_mat = dist_mat[:, :, :idx2]
     for i in range(len(tns)):
-        for j in range(len(tns)):
-            mean_dist_pair = np.nanmean(dist_mat[i, j, :])
-            #inds = np.where(np.isnan(dist_mat[i, j, :]))
-            #print(inds)
-            dist_mat[i, j, :][np.isnan(dist_mat[i, j, :])] = mean_dist_pair
-            #dist_mat[i, j, :].fillna(dist_mat[i, j, :].mean()) 
+        for j in range(i + 1, len(tns)):
+            mean_dist_pair = np.nanmean(dist_mat[i][j][:])
+            assert np.nanmean(dist_mat[i][j][:]) == np.nanmean(dist_mat[j][i][:])
+            dist_mat[i][j][:][np.isnan(dist_mat[i][j][:])] = dist_mat[j][i][:][np.isnan(dist_mat[j][i][:])] = mean_dist_pair
+
     if args.mode == 'all':
         with open(args.outputmatrix, 'w') as f:
             f.write(str(idx2) + '\n\n')
