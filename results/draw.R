@@ -1,4 +1,66 @@
 require(ggplot2);require(reshape2);require(scales);require(ggpubr);require(tidyr);require(ggpattern);library(stringr);library(dplyr)
+library(tidyr)
+
+# biological data analysis
+s=read.csv('corrs.csv')
+colnames(s) <- c('Bees', 'Birds', 'Plants', 'Bacterial\n(core)', 'Bacterial\n(non-ribosomal)', 'Bacterial\n(WoL)')
+s = as.data.frame(sapply(s, as.numeric))
+plot_s      <- pivot_longer(s, cols = 1:6)
+nrow(melt(s))
+
+#plot_s$value <- transform(plot_s, value = as.numeric(value))
+ggplot(plot_s, aes(name, log10(as.numeric(value)), fill = name)) + 
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))+
+  scale_fill_brewer(palette = "Spectral",name="",direction = -1)+
+  scale_color_brewer(palette = "Spectral",name="")+
+  scale_y_continuous(name="Log branch length ratio" )+
+  geom_hline(yintercept=0, linetype="dotted", color = "grey40")+
+  geom_vline(xintercept=3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept=5.5, linetype="dashed", color = "black")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "vertical",)+
+  scale_x_discrete(name="")+
+  coord_cartesian(ylim=c(-2.5,2.5))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE),
+         linetype=guide_legend(nrow=2, byrow=TRUE))
+ggsave("biological-violin.pdf",width=5,height=3)
+
+
+#plot_s$value <- transform(plot_s, value = as.numeric(value))
+ggplot(plot_s, aes(name, log10(as.numeric(value)), fill = name)) + 
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))+
+  scale_fill_brewer(palette = "Spectral",name="",direction = -1)+
+  scale_color_brewer(palette = "Spectral",name="")+
+  scale_y_continuous(name="Log branch length ratio" )+
+  geom_hline(yintercept=0, linetype="dotted", color = "grey40")+
+  geom_vline(xintercept=3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept=5.5, linetype="dashed", color = "black")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "vertical",)+
+  scale_x_discrete(name="")+
+  #coord_cartesian(ylim=c(-4,4))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE),
+         linetype=guide_legend(nrow=2, byrow=TRUE))
+ggsave("biological-violin-full.pdf",width=5,height=3)
+
+
+ggplot(plot_s, aes(x=log10(as.numeric(value)), color = name)) + 
+  stat_ecdf()+
+  scale_fill_brewer(palette = "Spectral",name="")+
+  scale_color_brewer(palette = "Spectral",name="")+
+  scale_y_continuous(name="Cumulative distribution" )+
+  geom_vline(xintercept=0, linetype="dashed", color = "black")+
+  #geom_hline(yintercept=0, linetype="dashed", color = "black")+
+  #geom_vline(xintercept=2.5, linetype="dashed", color = "black")+
+  #geom_vline(xintercept=4.5, linetype="dashed", color = "black")+
+  theme_bw()+
+  theme(legend.position = c(0.16, 0.55), legend.direction = "vertical",)+
+  scale_x_continuous(name="Log branch length ratio")+
+  coord_cartesian(xlim=c(-4,4))+
+  guides(color=guide_legend(nrow=6, byrow=TRUE),
+         linetype=guide_legend(nrow=6, byrow=TRUE))
+ggsave("biological-ecdf.pdf",width=6,height=3)
+
 
 #s=read.csv('gdl_100gt_all_branches_fixed.csv')
 #s=read.csv('gdl_100gt_all_branches_vary_dl.csv')
@@ -91,11 +153,9 @@ ggplot(aes(x=genes_num,y=mem_gb,color=Method,group=Method),
   scale_y_continuous(trans="log10",name="Peak memory usage (GB)" )+
   theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",
-        axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0),
         legend.box.margin = margin(0), legend.margin = margin(0))+
-  #coord_cartesian(xlim=c(1,5),clip="off") +
-  scale_x_discrete(label=function(x) gsub(" ","\n",x,fixed=T))+
+  scale_x_discrete(name="Number of genes")+
   guides(color=guide_legend(nrow=2, byrow=TRUE),
          linetype=guide_legend(nrow=2, byrow=TRUE))
 ggsave("gdl-memory.pdf",width=4,height =3)
@@ -297,18 +357,16 @@ ggplot(aes(x= Condition,y=l.est-l.true,color=Method), data=s[!s$Condition=='true
   coord_cartesian(ylim=c(-0.1,0.1))
 ggsave("gdl-bias_overall_vary_ils.pdf",width=7,height =3.5)
 
-h = read.csv('hgt_estgt_all_branches.csv')
+h = read.csv('hgt_estgt_castlesonly_branches.csv')
 head(h)
 nrow(h)
 unique(h$Method)
 h$se = (h$l.est - h$l.true)^2 
 #h$Method = factor(h$Method, levels=c("CASTLES" ,"CASTLES-II", "CASTLES-II(lambert)", "CASTLES-II(lambert+1/s)", "CASTLES-II(lambert+1/2s)"))#, "ERaBLE", 
                                      #"Patristic(AVG)+FastME", "Concat+RAxML"))
-h$Method = factor(h$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+#h$Method = factor(h$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+h$Method = factor(h$Method, levels=c("CASTLES-Pro" , "CASTLES-Pro(chao)"))
 h$Condition = factor(h$Condition, levels=c('0 (0)', '2e-09 (0.08)', '5e-09 (0.2)', '2e-08 (0.8)', '2e-07 (8)', '5e-07 (20)'))
-h %>% drop_na(Branch.Type)
-
-h$Condition =  factor(h$Condition) 
 levels(h$Condition) = list('0\n(0)' = '0 (0)',
                            '2e-09\n(0.08)' = '2e-09 (0.08)', 
                            '5e-09\n(0.2)' = '5e-09 (0.2)',
@@ -316,7 +374,14 @@ levels(h$Condition) = list('0\n(0)' = '0 (0)',
                            '2e-07\n(8)' = '2e-07 (8)',
                            '5e-07\n(20)' = '5e-07 (20)')
 
+#h$Condition = factor(h$Condition, levels=c('2e-08 (0.8)', '2e-07 (8)', '5e-07 (20)'))
+#h$Condition =  factor(h$Condition) 
+#levels(h$Condition) = list('2e-08\n(0.8)'= '2e-08 (0.8)',
+#                           '2e-07\n(8)' = '2e-07 (8)',
+#                           '5e-07\n(20)' = '5e-07 (20)')
 
+h %>% drop_na(Branch.Type)
+h %>% drop_na(Condition)
 
 h$l.est = ifelse(h$l.est <=0, 1e-6, h$l.est)
 h$log10err = log10(h$l.est / h$l.true )
@@ -361,6 +426,21 @@ ggsave("hgt-error-perrep.pdf",width=7,height = 4.7)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
+       data=dcast(data=h,Condition+Method+replicate~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))
+ggsave("hgt-error-perrep-castlesonly.pdf",width=7,height = 4.7)
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
        data=dcast(data=h,Condition+Method+replicate+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
   scale_y_continuous(trans="identity",name="Mean absolute error")+
   facet_wrap(~Branch.Type)+
@@ -399,11 +479,12 @@ ggplot(aes(x=Condition,
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   #geom_boxplot(outlier.size = 0)+
+  scale_x_discrete(name="HGT rate")+
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
   theme(legend.position = c(.4,.8), legend.direction = "horizontal",
-        axis.title.x = element_blank(),
+       # axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=3, byrow=TRUE))
 ggsave("hgt-error-perrep-line.pdf",width=5,height = 3.2)
@@ -420,15 +501,32 @@ ggplot(aes(x=Condition,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        # axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("legend-hgt.pdf",width=6,height = 3.2)
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method, na.rm = TRUE),
+       data=subset(dcast(h,Condition+Method+replicate~'abserr' ,value.var = "abserr",fun.aggregate = mean), !is.na(Condition)))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="HGT rate")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",
-        #axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=3, byrow=TRUE))
-ggsave("hgt-error-perrep-line-main.pdf",width=3.5,height = 3.2)
+ggsave("hgt-error-perrep-castlesonly.pdf",width=4,height = 3)
+
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
-       data=dcast(data=h,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+       data=subset(dcast(data=h,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))), !is.na(Condition)))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
@@ -436,11 +534,11 @@ ggplot(aes(x=Condition,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
-  theme(legend.position = "none", legend.direction = "horizontal",,
+  theme(legend.position = "bottom", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
   coord_cartesian(ylim=c(0.15,0.5))+
-  guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("hgt-logerror-perrep-line-main.pdf",width=3.5,height = 3.2)
+  guides(color=guide_legend(nrow=1, byrow=TRUE))
+ggsave("hgt-logerror-perrep-castlesonly.pdf",width=4,height = 3.5)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -510,7 +608,7 @@ ggplot(aes(x=Condition,
 ggsave("hgt-logerror-perrep-line-broken.pdf",width=7,height = 4)
 
 
-m = read.csv('mvroot_all_branches_estgt.csv')
+m = read.csv('mvroot_castlesonly_branches_estgt.csv')
 head(m)
 nrow(m)
 unique(m$Method)
@@ -518,7 +616,7 @@ m$se = (m$l.est - m$l.true)^2
 mvariants = m$Method %in% c("Naive")
 m$outgroup = factor(grepl("outgroup.1", m$Condition))
 m$ratevar =  unique(sub(".genes.*","",sub("outgroup.*.species.","",m$Condition)))
-m$Method = factor(m$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+m$Method = factor(m$Method, levels=c("CASTLES-Pro" , "CASTLES-Pro(chao)"))# "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
 
 summary(with(m[m$Method =="CASTLES" ,],l.est < 0))
 m$l.est = ifelse(m$l.est <=0, 1e-6, m$l.est)
@@ -562,7 +660,7 @@ ggplot(aes(color=Method, y=abserr,x=cut(AD,4)),
   scale_shape(name="",labels=c("With outgroup","No outgroup"))+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
-  theme(legend.position =  "none", legend.direction = "horizontal",
+  theme(legend.position =  "bottom", legend.direction = "horizontal",
         legend.box.margin = margin(0), legend.margin = margin(0),
         axis.text.x = element_text(angle=0,size=11))+
   coord_cartesian()+
@@ -611,7 +709,7 @@ ggplot(aes(color=Method, y=l.est-l.true,x=cut(AD,4)), na.rm = TRUE,data=m[!mvari
   ggsave("MV-bias-ILS-talk_estgt.pdf",width=6,height = 4)
 
 # DISCO+QR datasets
-s=read.csv('discoqr_all_branches_dup.csv')
+s=read.csv('discoqr_castlesonly_branches_dup.csv')
 
 s$Condition =  factor(s$Condition)#, levels=c("50bp", "100bp", "500bp"))
 s$Method=factor(s$Method,levels=c("CASTLES-Pro" , "CASTLES-DISCO", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO"))
@@ -637,7 +735,7 @@ ggplot(aes(x=duprate,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
-  theme(legend.position = "none", legend.direction = "horizontal",,
+  theme(legend.position = "bottom", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
 ggsave("gdl-discoqr-dup-error-logerr.pdf",width=7,height = 3.1)
@@ -656,7 +754,7 @@ ggplot(aes(x=duprate,
   theme(legend.position = "bottom", legend.direction = "horizontal",
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-dup-error-perrep-line.pdf",width=7,height = 4)
+ggsave("gdl-dup-error-perrep-line-castlesonly.pdf",width=7,height = 4)
 
 
 ggplot(aes(x= duprate,
@@ -678,13 +776,13 @@ ggplot(aes(x= duprate,
   guides(color=guide_legend(nrow=2, byrow=TRUE))
 #coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
 #annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
-ggsave("gdl-discoqr-dup-bias.pdf",width=6,height =  10)
+ggsave("gdl-discoqr-dup-bias-castlesonly.pdf",width=6,height =  10)
 
 
-s=read.csv('gdl_all_branches_species.csv')
+s=read.csv('discoqr_castlesonly_branches_species.csv')
 
 s$Condition =  factor(s$Condition)#, levels=c("50bp", "100bp", "500bp"))
-s$Method=factor(s$Method,levels=c("CASTLES-Pro" , "CASTLES-DISCO", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO"))
+s$Method=factor(s$Method,levels=c("CASTLES-Pro" , "CASTLES-Pro(chao)"))##c("CASTLES-Pro" , "CASTLES-DISCO", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO"))
 s$l.est = ifelse(s$l.est <=0, 1e-6, s$l.est)
 s$log10err = log10(s$l.est / s$l.true )
 s$abserr = abs(s$l.true - s$l.est)
@@ -697,19 +795,39 @@ s$Condition =  factor(s$Condition, levels=c("20", "50", "100"))
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),Condition+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~highILS,ncol=2,scales = "free_x")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Number of species")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",,
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-discoqr-species-error-logerr-main.pdf",width=4,height = 2.5)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
        data=dcast(data=s,Condition+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   facet_wrap(~highILS,ncol=2,scales = "free_x")+
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   scale_x_discrete(name="Number of species")+
-  scale_fill_brewer(palette = "Dark2")+
-  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
-  theme(legend.position = "none", legend.direction = "horizontal",,
+  theme(legend.position = "bottom", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-discoqr-species-error-logerr.pdf",width=4.5,height = 3)
+ggsave("gdl-discoqr-species-error-logerr-main.pdf",width=4,height = 2.5)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -722,6 +840,28 @@ ggplot(aes(x=Condition,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-species-error-perrep-line-main-castlesonly.pdf",width=4,height = 2.5)
+
+pal_fill <- scales::brewer_pal(palette = "Dark2")(5)
+names(pal_fill) <-  c(LETTERS[1],LETTERS[3:5])
+pal_fill
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),Condition+Method+replicate+highILS~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~highILS,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Number of species")+
+  #scale_fill_brewer(palette = "Dark2")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+ # scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
@@ -729,8 +869,30 @@ ggsave("gdl-species-error-perrep-line-main.pdf",width=4,height = 2.5)
 
 ggplot(aes(x= Condition,
            y=l.est-l.true,color=Method),
+       data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")))+
+  facet_grid(~Branch.Type+highILS)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated - true length (bias)"))+
+  stat_summary(fun.data = mean_sdl,position = position_dodge(width=0.75))+
+  scale_x_discrete(name="Number of species")+
+  #geom_boxplot(outlier.size = 0)+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  theme_bw()+
+  theme(legend.position = "right", legend.direction = "horizontal",,
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  guides(color=guide_legend(nrow=4, byrow=TRUE))
+#coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
+#annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("gdl-discoqr-species-bias-main-1row.pdf",width=12,height =2.7)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
        data=s)+
-  facet_grid(Branch.Type~highILS)+
+  facet_grid(~Branch.Type+highILS)+
   geom_hline(color="grey50",linetype=1,yintercept = 0)+
   #scale_x_continuous(trans="identity",name="True length")+
   scale_y_continuous(name=expression("Estimated - true length (bias)"))+
@@ -766,14 +928,14 @@ ggplot(aes(x= Condition,
   guides(color=guide_legend(nrow=1, byrow=TRUE))
 #coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
 #annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
-ggsave("gdl-legend.pdf",width=8,height =5)
+ggsave("gdl-species-castlesonly.pdf",width=8,height =5)
 
 
 
-s=read.csv('discoqr_all_branches_seqlen.csv')
+s=read.csv('discoqr_castlesonly_branches_seqlen.csv')
 
 s$Condition =  factor(s$Condition)#, levels=c("50bp", "100bp", "500bp"))
-s$Method=factor(s$Method,levels=c("CASTLES-Pro" , "CASTLES-DISCO", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO"))
+s$Method=factor(s$Method,levels=c("CASTLES-Pro" , "CASTLES-Pro(chao)"))#"CASTLES-DISCO", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO"))
 s$l.est = ifelse(s$l.est <=0, 1e-6, s$l.est)
 s$log10err = log10(s$l.est / s$l.true )
 s$abserr = abs(s$l.true - s$l.est)
@@ -786,19 +948,59 @@ s$Condition =  factor(s$Condition, levels=c("50bp", "100bp", "500bp"))
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),Condition+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~highILS,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Sequence length")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",,
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-discoqr-seqlen-error-logerr-main.pdf",width=4,height = 2.5)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
        data=dcast(data=s,Condition+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   facet_wrap(~highILS,ncol=2)+
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   scale_x_discrete(name="Sequence length")+
-  scale_fill_brewer(palette = "Dark2")+
-  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-discoqr-seqlen-error-logerr-main.pdf",width=4,height = 2.5)
+ggsave("gdl-discoqr-seqlen-error-logerr-castlesonly.pdf",width=4,height = 2.5)
+
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),Condition+Method+replicate+highILS~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~highILS,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Sequence length")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-seqlen-error-perrep-line-castlesonly.pdf",width=4,height = 2.5)
+
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -808,13 +1010,15 @@ ggplot(aes(x=Condition,
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   scale_x_discrete(name="Sequence length")+
-  scale_fill_brewer(palette = "Dark2")+
-  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
-  theme(legend.position = "none", legend.direction = "horizontal",
+  theme(legend.position = "bottom", legend.direction = "horizontal",
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-seqlen-error-perrep-line-main.pdf",width=4,height = 2.5)
+ggsave("gdl-seqlen-error-perrep-line-castlesonly.pdf",width=4,height = 2.5)
 
 ggplot(aes(x= Condition,
            y=l.est-l.true,color=Method),
@@ -836,6 +1040,27 @@ ggplot(aes(x= Condition,
 #coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
 #annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
 ggsave("gdl-discoqr-seqlen-bias.pdf",width=7,height =  6)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=s)+
+  facet_grid(Branch.Type~highILS)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated - true length (bias)"))+
+  stat_summary(fun.data = mean_sdl,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_x_discrete(name="Sequence length")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+#coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
+#annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("gdl-discoqr-seqlen-bias-castlesonly.pdf",width=7,height =  6)
 
 
 s=read.csv('discoqr_all_branches_genetrees.csv')
@@ -873,14 +1098,16 @@ ggsave("gdl-discoqr-genetrees-bias.pdf",width=7,height =  6)
 
 ggplot(aes(x=as.factor(num_genes),
            y=log10err,color=Method),
-       data=dcast(data=s,num_genes+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),num_genes+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   facet_wrap(~highILS,ncol=2)+
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   scale_x_discrete(name="Number of genes")+
-  scale_fill_brewer(palette = "Dark2")+
-  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
@@ -890,14 +1117,16 @@ ggsave("gdl-discoqr-genetrees-error-logerr-main.pdf",width=4,height = 2.5)
 # ggsave("gdl-discoqr-genetrees-error-logerr.pdf",width=4.5,height = 3)
 ggplot(aes(x=as.factor(num_genes),
            y=abserr,color=Method),
-       data=dcast(data=s,num_genes+Method+replicate+highILS~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+       data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),num_genes+Method+replicate+highILS~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
   scale_y_continuous(trans="identity",name="Mean absolute error")+
   facet_wrap(~highILS,ncol=2)+
   stat_summary()+
   stat_summary(aes(group=Method),geom="line")+
   scale_x_discrete(name="Number of genes")+
-  scale_fill_brewer(palette = "Dark2")+
-  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_brewer(palette = "Dark2")+
+  #scale_color_brewer(palette = "Dark2",name="")+
+  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
   theme(legend.position = "none", legend.direction = "horizontal",
         axis.text.x = element_text(angle=0))+
@@ -907,7 +1136,7 @@ ggsave("gdl-genetrees-error-perrep-line-main.pdf",width=4,height = 2.5)
 
 # ILS S100 dataset
 
-s = read.csv('s100_all_branches.csv')
+s = read.csv('s100_castles_all_branches.csv')
 head(s)
 unique(s$Method)
 s$se = (s$l.est - s$l.true)^2 
@@ -915,13 +1144,14 @@ s$se = (s$l.est - s$l.true)^2
 names(s)=c("X"             ,      "Condition"         ,  "Method"        ,      "replicate"    ,       "Branch.Type"  ,
            "l.true"      ,        "l.est")
 #s$Method=factor(s$Method,levels=c("CASTLES" , "CASTLES-Pro(taylor)", "CASTLES-Pro(lambert)", "CASTLES-Pro(lambert+1/s)", "CASTLES-Pro(lambert+1/2s)"))
-s$Method = factor(s$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+#s$Method = factor(s$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+s$Method = factor(s$Method, levels=c("CASTLES-Pro" , "CASTLES-Pro(chao)"))
 s$Condition =  factor(s$Condition) 
 levels(s$Condition) = list("200bp" = "fasttree_genetrees_200_non", 
                            "400bp" = "fasttree_genetrees_400_non", 
                            "800bp" = "fasttree_genetrees_800_non",
                            "1600bp" = "fasttree_genetrees_1600_non",
-                           "true gene trees" = "truegenetrees")
+                           "true\ngene\ntrees" = "truegenetrees")
 
 s$l.est = ifelse(s$l.est <=0, 1e-6, s$l.est)
 s$log10err = log10(s$l.est / s$l.true )
@@ -938,12 +1168,50 @@ ggplot(aes(x=Condition,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
-  theme(legend.position = "none", legend.direction = "horizontal",
+  theme(legend.position = "bottom", legend.direction = "horizontal",
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0))+
   coord_cartesian(xlim=c(1,5),clip="off")+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("S100-error-perrep.pdf",width=6,height = 3)
+ggsave("S100-error-perrep-onlycastles.pdf",width=5,height = 4)
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=s,Condition+Method+replicate~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        axis.title = element_text(size = 14))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep-small.pdf",width=2.8,height = 3)
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=s,Condition+Method+replicate+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep-broken-onlycastles.pdf",width=8,height = 4)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -959,9 +1227,10 @@ ggplot(aes(x=Condition,
   theme_bw()+
   theme(legend.position = "bottom", legend.direction = "horizontal",
         axis.title.x = element_blank(),
-        axis.text.x = element_text(angle=0))+
+        axis.text.x = element_text(angle=0),
+        axis.title = element_text(size = 12))+
   guides(color=guide_legend(nrow=3, byrow=TRUE))
-ggsave("S100-error-perrep-variants-line.pdf",width=5,height = 4.5)
+ggsave("S100-error-perrep-variants-small.pdf",width=5,height = 4.5)
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
@@ -982,7 +1251,71 @@ ggplot(aes(x=Condition,
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))+
   coord_cartesian(ylim=c(0,1),clip="off")
-ggsave("S100-logerror-perrep.pdf",width=6,height = 4.3)
+ggsave("S100-logerror-perrep-castlesonly.pdf",width=6,height = 4.3)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        axis.title = element_text(size = 14))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))+
+  #coord_cartesian(ylim=c(0,1),clip="off")
+ggsave("S100-logerror-perrep-small.pdf",width=2.7,height = 3)
+
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        axis.title = element_text(size = 12))+
+  guides(color=guide_legend(nrow=1, byrow=TRUE))
+  #coord_cartesian(ylim=c(0,1),clip="off")
+  ggsave("S100-legend.pdf",width=8,height = 3)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  #stat_summary()+
+  #stat_summary(aes(group=Method),geom="line")+
+  geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  stat_summary(position = position_dodge(width=0.86))+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))+
+  coord_cartesian(ylim=c(0,1),clip="off")
+ggsave("S100-logerror-perrep-broken-castlesonly.pdf",width=9,height = 4.3)
 
 ggplot(aes(x= Condition,
            y=l.est-l.true,color=Method),
@@ -1002,7 +1335,52 @@ ggplot(aes(x= Condition,
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0),
         legend.box.margin = margin(0), legend.margin = margin(0))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.01,0.01))+
+  annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-point-castlesonly.pdf",width=6,height =  3.5)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=s)+
+  #facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  #stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0),
+        axis.title = element_text(size = 14))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.025,0.04))+
+  annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-point-small-line.pdf",width=2.8,height =  3)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=s)+
+  facet_wrap(~Branch.Type,ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  #stat_summary()+
+  #stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
   coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.025,0.05))+
   annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
-ggsave("S100-bias-point.pdf",width=6,height =  3.5)
+ggsave("S100-bias-point-broken-castlesonly.pdf",width=9,height =  3.5)
 
