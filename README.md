@@ -24,4 +24,4 @@ For experiments in this study, we analyzed three sets of simulated datasets and 
 - **Plants**: 83-taxon dataset from [Wickett et al. (2014)](https://www.pnas.org/doi/10.1073/pnas.1323926111) with 424 single-copy genes and 9,610 multi-copy genes.
 - **Bacterial (core genes)**: 72-taxon dataset from [Williams et al. (2020)](https://www.nature.com/articles/s41559-019-1040-x) with 49 single-copy genes.
 - **Bacterial (non-ribosomal genes)**: 108-taxon dataset from [Petitjean et al. (2015)](https://pubmed.ncbi.nlm.nih.gov/25527841/) with 38 single-copy genes.
-- **Bacterial (non-ribosomal genes)**: 10,575-taxon dataset from [Zhu et al. (2019)](https://www.nature.com/articles/s41467-019-13443-4) with 381 single-copy genes.
+- **Bacterial (WoL)**: 10,575-taxon dataset from [Zhu et al. (2019)](https://www.nature.com/articles/s41467-019-13443-4) with 381 single-copy genes.
