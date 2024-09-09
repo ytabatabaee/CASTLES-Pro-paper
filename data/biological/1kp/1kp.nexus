@@ -1,0 +1,182 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=79;
+	taxlabels
+	Acorus
+	Allamanda
+	Alsophila
+	Amborella
+	Angiopteris
+	Aquilegia
+	Arabidopsis
+	Boehmeria
+	Brachypodium
+	Carica
+	Catharanthus
+	Cedrus
+	Chaetosphaeridium
+	Chara
+	Chlorokybus
+	Colchicum
+	Coleochaete
+	Cosmarium
+	Cunninghamia
+	Cycas
+	Cylindrocystis
+	Dioscorea
+	Diospyros
+	Ephedra
+	Equisetum
+	Eschscholzia
+	Ginkgo
+	Gnetum
+	Hibiscus
+	Houttuynia
+	Huperzia
+	Inula
+	Ipomoea
+	Juniperus
+	Kadsura
+	Klebsormidium
+	Kochia
+	Larrea
+	Liriodendron
+	Marchantiaemarginata
+	Marchantiapolymorpha
+	Medicago
+	Mesostigma
+	Mougeotia
+	Netrium
+	Nothocerosaenigmaticus
+	Nothocerosvincentianus
+	Nuphar
+	Ophioglossum
+	Oryza
+	Persea
+	Physcomitrella
+	Pinus
+	Podophyllum
+	Polytrichum
+	Populus
+	Prumnopitys
+	Psilotum
+	Pteridium
+	Rosmarinus
+	Roya
+	Sabal
+	Sarcandra
+	Saruma
+	Sciadopitys
+	Selaginella
+	Smilax
+	Sorghum
+	Sphagnum
+	Spirogyra
+	Spirotaenia
+	Tanacetum
+	Taxus
+	Uronema
+	Vitis
+	Welwitschia
+	Yucca
+	Zami
+	Zea
+;
+end;
+
+begin trees;
+	tree concat = [&R] [&4=true](Uronema:0.844893,((Mesostigma:0.509675,(Spirotaenia:0.413033,Chlorokybus:0.343021)[&label=100]:0.100163)[&label=100]:0.058882,(Klebsormidium:0.364326,(Chara:0.373168,((Coleochaete:0.301476,Chaetosphaeridium:0.341115)[&label=100]:0.067148,(((Spirogyra:0.415393,((Roya:0.321916,Cosmarium:0.413512)[&label=100]:0.046348,Netrium:0.331594)[&label=100]:0.027617)[&label=100]:0.026912,(Cylindrocystis:0.268448,Mougeotia:0.416716)[&label=100]:0.07754)[&label=100]:0.053751,((Nothocerosaenigmaticus[&!color=#0000ff]:0.009121,Nothocerosvincentianus[&!color=#0000ff]:0.008697)[&label=100]:0.229462,(((Sphagnum:0.124716,(Polytrichum:0.085194,Physcomitrella:0.108676)[&label=100]:0.062966)[&label=100]:0.075272,(Marchantiapolymorpha:0.036534,Marchantiaemarginata:0.02956)[&label=100]:0.181434)[&label=100]:0.019609,((Huperzia:0.197494,Selaginella:0.257344)[&label=100]:0.03648,((Equisetum:0.198247,(((Psilotum:0.108489,Ophioglossum:0.141675)[&label=100]:0.020982,Angiopteris:0.098414)[&label=100]:0.01334,(Pteridium:0.091789,Alsophila:0.056548)[&label=100]:0.111096)[&label=76]:0.01209)[&label=100]:0.038023,((((Zami:0.052577,Cycas[&!color=#ff0000]:0.073345)[&label=100]:0.028764,Ginkgo:0.048702)[&label=100]:0.010796,((Prumnopitys:0.07041,(Sciadopitys:0.042691,(Taxus:0.041942,(Cunninghamia:0.013784,Juniperus:0.036449)[&label=100]:0.021472)[&label=100]:0.01733)[&label=100]:0.008263)[&label=100]:0.026342,((Ephedra:0.139616,(Gnetum:0.102728,Welwitschia:0.131378)[&label=91]:0.025108)[&label=100]:0.076436,(Cedrus[&!color=#ff0000]:0.026534,Pinus:0.026434)[&label=100]:0.030232)[&label=100]:0.013995)[&label=100]:0.020092)[&label=100]:0.035728,(Amborella:0.110892,(Nuphar:0.120531,(Kadsura:0.100475,((((Liriodendron:0.052916,Persea:0.068302)[&label=100]:0.012695,(Houttuynia:0.104757,Saruma:0.066098)[&label=100]:0.032029)[&label=100]:0.008347,(Sarcandra:0.072893,(((Podophyllum:0.076651,Aquilegia:0.083522)[&label=100]:0.013507,Eschscholzia:0.086143)[&label=100]:0.014036,(Vitis:0.06434,(((Populus[&!color=#0000ff]:0.079902,(Hibiscus:0.085607,(Carica:0.075251,Arabidopsis[&!color=#0000ff]:0.13499)[&label=100]:0.014622)[&label=100]:0.007343)[&label=100]:0.008729,((Boehmeria:0.087467,Medicago[&!color=#0000ff]:0.118805)[&label=97]:0.008435,Larrea:0.107494)[&label=59]:0.006071)[&label=100]:0.014358,(Kochia:0.151646,(Diospyros:0.080657,((Tanacetum:0.053535,Inula:0.036518)[&label=100]:0.084153,(Rosmarinus:0.116692,(Ipomoea:0.091213,(Catharanthus:0.045427,Allamanda:0.046984)[&label=100]:0.043745)[&label=50]:0.006971)[&label=100]:0.014741)[&label=100]:0.009667)[&label=100]:0.011864)[&label=100]:0.007182)[&label=100]:0.007728)[&label=100]:0.029731)[&label=100]:0.024347)[&label=98]:0.007065)[&label=100]:0.00614,(Acorus:0.11485,(Dioscorea:0.102726,((Smilax:0.046577,Colchicum:0.079165)[&label=100]:0.019436,((((Zea:0.022505,Sorghum:0.01364)[&label=100]:0.031454,(Brachypodium:0.04523,Oryza[&!color=#0000ff]:0.037582)[&label=100]:0.009253)[&label=100]:0.135541,Sabal:0.059145)[&label=92]:0.012643,Yucca:0.089876)[&label=71]:0.005222)[&label=89]:0.007209)[&label=100]:0.029945)[&label=100]:0.02006)[&label=100]:0.022981)[&label=100]:0.015197)[&label=100]:0.015906)[&label=100]:0.110018)[&label=100]:0.107611)[&label=100]:0.038976)[&label=100]:0.026384)[&label=100]:0.018988)[&label=100]:0.112676)[&label=100]:0.028533)[&label=100]:0.022297)[&label=100]:0.03305)[&label=100]:0.109944)[&label=100]:0.050751);
+	tree castlespro = [&R] [&4=true]((((Spirotaenia:0.413893,Chlorokybus:0.305342)[&label=1.0]:0.120712,Mesostigma:0.517808)[&label=1.0]:0.049028,(Klebsormidium:0.38367,((Chaetosphaeridium:0.359672,Coleochaete:0.24053)[&label=1.0]:0.107603,(Chara:0.501069,((((Mougeotia:0.37212,Cylindrocystis:0.187791)[&label=1.0]:0.088314,Spirogyra:0.488218)[&label=0.59544]:0.008038,((Roya:0.302414,Cosmarium:0.409747)[&label=1.0]:0.085232,Netrium:0.395113)[&label=1.0]:0.055265)[&label=1.0]:0.061409,(((((Polytrichum:0.092077,Physcomitrella:0.162176)[&label=1.0]:0.089921,Sphagnum:0.139796)[&label=1.0]:0.099834,(Marchantiaemarginata:0.018242,Marchantiapolymorpha:0.027424)[&label=1.0]:0.122562)[&label=1.0]:0.02721,(Nothocerosaenigmaticus[&!color=#0000ff]:0.083148,Nothocerosvincentianus[&!color=#0000ff]:0.083842)[&label=1.0]:0.363026)[&label=0.993216]:0.052047,((Selaginella:0.382924,Huperzia:0.254201)[&label=1.0]:0.036945,(((((Ophioglossum:0.168727,Psilotum:0.114932)[&label=1.0]:0.064333,Angiopteris:0.116111)[&label=1.0]:0.03546,(Alsophila:0.056787,Pteridium:0.114891)[&label=1.0]:0.056749)[&label=0.999661]:0.016119,Equisetum:0.27597)[&label=1.0]:0.065121,((((((Gnetum:0.130416,Welwitschia:0.117422)[&label=1.0]:0.024456,Ephedra:0.157186)[&label=1.0]:0.08782,(Cedrus[&!color=#ff0000]:0.012217,Pinus:0.017867)[&label=1.0]:0.075606)[&label=1.0]:0.012005,((((Juniperus:0.046895,Cunninghamia:0.014646)[&label=1.0]:0.02197,Taxus:0.043829)[&label=1.0]:0.024172,Sciadopitys:0.058572)[&label=1.0]:0.013273,Prumnopitys:0.095485)[&label=1.0]:0.051327)[&label=1.0]:0.009321,((Zami:0.05714,Cycas[&!color=#ff0000]:0.032555)[&label=1.0]:0.033019,Ginkgo:0.049076)[&label=1.0]:0.030639)[&label=1.0]:0.06606,(Amborella:0.145288,(Nuphar:0.206917,(Kadsura:0.12893,((((((((((Arabidopsis[&!color=#0000ff]:0.27591,Carica:0.122539)[&label=1.0]:0.020995,Hibiscus:0.160565)[&label=1.0]:0.005461,Populus[&!color=#0000ff]:0.1625)[&label=1.0]:0.01698,Larrea:0.174905)[&label=0.995306]:0.010796,(Boehmeria:0.159063,Medicago[&!color=#0000ff]:0.24622)[&label=1.0]:0.014546)[&label=1.0]:0.019251,(((((Catharanthus:0.049949,Allamanda:0.051255)[&label=1.0]:0.085149,(Ipomoea:0.147704,Rosmarinus:0.182619)[&label=0.589683]:0.00123)[&label=1.0]:0.03271,(Tanacetum:0.076614,Inula:0.037828)[&label=1.0]:0.104812)[&label=1.0]:0.010298,Diospyros:0.130522)[&label=1.0]:0.02858,Kochia:0.271223)[&label=0.996466]:0.003404)[&label=1.0]:0.001807,Vitis:0.128579)[&label=1.0]:0.048074,((Podophyllum:0.109931,Aquilegia:0.134654)[&label=1.0]:0.018084,Eschscholzia:0.150221)[&label=1.0]:0.029474)[&label=1.0]:0.026562,(((Persea:0.128034,Liriodendron:0.094863)[&label=1.0]:0.008398,(Saruma:0.095743,Houttuynia:0.154774)[&label=1.0]:0.045379)[&label=1.0]:0.00585,Sarcandra:0.111241)[&label=1.0]:0.025224)[&label=0.965103]:0.013843,(Acorus:0.181458,(Dioscorea:0.152597,(((Colchicum:0.110828,Smilax:0.054537)[&label=1.0]:0.041935,Yucca:0.144972)[&label=0.617018]:7.13E-4,(Sabal:0.066246,((Zea:0.042641,Sorghum:0.012579)[&label=1.0]:0.057668,(Oryza[&!color=#0000ff]:0.086972,Brachypodium:0.083794)[&label=1.0]:0.005701)[&label=1.0]:0.214327)[&label=1.0]:0.023723)[&label=1.0]:0.005445)[&label=1.0]:0.055112)[&label=1.0]:0.038843)[&label=1.0]:0.043087)[&label=1.0]:0.044923)[&label=1.0]:0.032264)[&label=1.0]:0.2224)[&label=1.0]:0.019957)[&label=1.0]:0.061641)[&label=1.0]:0.019088)[&label=1.0]:0.133665)[&label=0.999965]:0.015127)[&label=0.709742]:0.011429)[&label=1.0]:0.076449)[&label=1.0]:0.165325)[&label=1.0]:0.050751,Uronema:0.991238);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=2.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=495;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute="label";
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute="User selection";
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute="Fixed";
+	set nodeShapeInternal.colourAttribute="User selection";
+	set nodeShapeInternal.isShown=false;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=11.0;
+	set scaleAxis.isShown=true;
+	set scaleAxis.lineWidth=1.5;
+	set scaleAxis.majorTicks=0.05;
+	set scaleAxis.minorTicks=0.025;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=12.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=2.0;
+	set scaleBar.scaleRange=0.2;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=13;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=true;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

@@ -1,0 +1,146 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=39;
+	taxlabels
+	Akebia_trifoliata
+	Amaranthus_hypochondriacus
+	Aquilegia_coerulea
+	Arabidopsis_thaliana
+	Betula_pendula
+	Buxus_sempervirens
+	Buxus_sinica
+	Carica_papaya
+	Citrus_sinensis
+	Coffea_canephora
+	Eschscholzia_californica
+	Euptelea_pleiosperma
+	Glycine_max
+	Grevillea_robusta
+	Gunnera_manicata
+	Kalanchoe_fedtshenkoi
+	Kalanchoe_laxiflora
+	Liriodendron_chinense
+	Macadamia_integrifolia
+	Meliosma_cunefolia
+	Meliosma_dillenifolia
+	Mimulus_guttatus
+	Nandina_domestica
+	Nelumbo_lutea
+	Nelumbo_nucifera
+	Oryza_sativa
+	Papaver_rhoeas
+	Papaver_somniferum
+	Persea_americana
+	Platanus_occidentalis
+	Populus_trichocarpa
+	Sabia_emarginata
+	Sabia_swinhonei
+	Sanguinaria_canadensis
+	Solanum_lycopersicum
+	Sorghum_bicolor
+	Tetracentron_sinense
+	Trochodendron_aralioides
+	Vitis_vinifera
+;
+end;
+
+begin trees;
+	tree castles_pro = [&R] ((((((((((((Carica_papaya:0.12938,Arabidopsis_thaliana:0.328188)[&label=1.0]:0.025522,(Citrus_sinensis:0.144104,Populus_trichocarpa:0.144815)[&label=0.999999]:0.020108)[&label=1.0]:0.027938,(Betula_pendula:0.111131,Glycine_max:0.225642)[&label=1.0]:0.008833)[&label=1.0]:0.037499,((((Solanum_lycopersicum:0.201505,Coffea_canephora:0.153147)[&label=1.0]:0.023996,Mimulus_guttatus:0.257886)[&label=1.0]:0.032055,Amaranthus_hypochondriacus:0.34902)[&label=1.0,!rotate=true]:0.02527,(Kalanchoe_fedtshenkoi[&!color=#0000ff]:0.035327,Kalanchoe_laxiflora[&!color=#0000ff]:0.035294)[&label=1.0]:0.361536)[&label=1.0,!rotate=true]:0.005522)[&label=1.0,!rotate=true]:0.013668,Vitis_vinifera:0.132607)[&label=1.0]:0.010452,Gunnera_manicata:0.179156)[&label=1.0,!color=#000000]:0.045551,((Buxus_sempervirens:0.021403,Buxus_sinica[&!color=#ff0000]:4.5E-4)[&label=1.0]:0.14155,(Trochodendron_aralioides:0.026742,Tetracentron_sinense:0.038249)[&label=1.0]:0.057659)[&label=1.0]:0.019197)[&label=1.0]:0.019207,((((Macadamia_integrifolia:0.085386,Grevillea_robusta:0.067194)[&label=1.0]:0.078483,Platanus_occidentalis:0.073166)[&label=1.0]:0.00339,(Nelumbo_nucifera[&!color=#ff0000]:0.00252,Nelumbo_lutea[&!color=#ff0000]:0.007922)[&label=1.0]:0.118216)[&label=1.0]:0.007009,((Sabia_emarginata[&!color=#ff0000]:0.013388,Sabia_swinhonei[&!color=#000000]:0.014197)[&label=1.0]:0.06305,(Meliosma_dillenifolia[&!color=#ff0000]:0.01526,Meliosma_cunefolia[&!color=#ff0000]:0.014028)[&label=1.0]:0.088913)[&label=1.0]:0.027316)[&label=1.0,!color=#000000]:0.018524)[&label=1.0]:0.007392,(((((Papaver_rhoeas[&!color=#ff0000]:0.004187,Papaver_somniferum[&!color=#ff0000]:0.005911)[&label=1.0]:0.091653,Eschscholzia_californica:0.120131)[&label=1.0]:0.016243,Sanguinaria_canadensis:0.041219)[&label=1.0]:0.043278,((Aquilegia_coerulea:0.144182,Nandina_domestica:0.105682)[&label=1.0]:0.0389,Akebia_trifoliata:0.09049)[&label=1.0]:0.018586)[&label=1.0]:0.023019,Euptelea_pleiosperma:0.063631)[&label=1.0]:0.026482)[&label=1.0]:0.021526,(Persea_americana:0.15807,Liriodendron_chinense:0.127715)[&label=1.0]:0.043921)[&label=1.0]:0.011856,(Oryza_sativa[&!color=#ff0000]:0.03743,Sorghum_bicolor:0.048934)[&label=1.0]:0.40113):0.0);
+	tree castles_pro_2 = [&R] ((((((((((((Carica_papaya:0.12938,Arabidopsis_thaliana:0.328188)[&label=1.0]:0.025522,(Citrus_sinensis:0.144104,Populus_trichocarpa:0.144815)[&label=0.999999]:0.020108)[&label=1.0]:0.027938,(Betula_pendula:0.111131,Glycine_max:0.225642)[&label=1.0]:0.008833)[&label=1.0]:0.037499,((((Solanum_lycopersicum:0.201505,Coffea_canephora:0.153147)[&label=1.0]:0.023996,Mimulus_guttatus:0.257886)[&label=1.0]:0.032055,Amaranthus_hypochondriacus:0.34902)[&label=1.0,!rotate=true]:0.02527,(Kalanchoe_fedtshenkoi[&!color=#0000ff]:0.035327,Kalanchoe_laxiflora[&!color=#0000ff]:0.035294)[&label=1.0]:0.361536)[&label=1.0,!rotate=true]:0.005522)[&label=1.0,!rotate=true]:0.013668,Vitis_vinifera:0.132607)[&label=1.0]:0.010452,Gunnera_manicata:0.179156)[&label=1.0,!color=#000000]:0.045551,((Buxus_sempervirens[&!color=#0000ff]:0.021403,Buxus_sinica[&!color=#ff0000]:4.5E-4)[&label=1.0]:0.14155,(Trochodendron_aralioides:0.026742,Tetracentron_sinense:0.038249)[&label=1.0]:0.057659)[&label=1.0]:0.019197)[&label=1.0]:0.019207,((((Macadamia_integrifolia:0.085386,Grevillea_robusta:0.067194)[&label=1.0]:0.078483,Platanus_occidentalis:0.073166)[&label=1.0]:0.00339,(Nelumbo_nucifera[&!color=#ff0000]:0.00252,Nelumbo_lutea[&!color=#000000]:0.007922)[&label=1.0]:0.118216)[&label=1.0]:0.007009,((Sabia_emarginata[&!color=#000000]:0.013388,Sabia_swinhonei[&!color=#000000]:0.014197)[&label=1.0]:0.06305,(Meliosma_dillenifolia[&!color=#0000ff]:0.01526,Meliosma_cunefolia[&!color=#000000]:0.014028)[&label=1.0]:0.088913)[&label=1.0]:0.027316)[&label=1.0,!color=#000000]:0.018524)[&label=1.0]:0.007392,(((((Papaver_rhoeas[&!color=#ff0000]:0.004187,Papaver_somniferum[&!color=#ff0000]:0.005911)[&label=1.0]:0.091653,Eschscholzia_californica:0.120131)[&label=1.0]:0.016243,Sanguinaria_canadensis:0.041219)[&label=1.0]:0.043278,((Aquilegia_coerulea:0.144182,Nandina_domestica:0.105682)[&label=1.0]:0.0389,Akebia_trifoliata:0.09049)[&label=1.0]:0.018586)[&label=1.0]:0.023019,Euptelea_pleiosperma:0.063631)[&label=1.0]:0.026482)[&label=1.0]:0.021526,(Persea_americana:0.15807,Liriodendron_chinense:0.127715)[&label=1.0]:0.043921)[&label=1.0]:0.011856,(Oryza_sativa[&!color=#ff0000]:0.03743,Sorghum_bicolor[&!color=#ff0000]:0.048934)[&label=1.0]:0.40113):0.0);
+	tree caml_353 = [&R] (((Persea_americana:0.154094,Liriodendron_chinense:0.10803):0.024404,((((Tetracentron_sinense:0.042264,Trochodendron_aralioides:0.025786)[&!rotate=true]:0.046568,((Buxus_sempervirens:0.036096,Buxus_sinica[&!color=#ff0000]:0.015624):0.124579,((Vitis_vinifera:0.106289,((((Kalanchoe_laxiflora[&!color=#0000ff]:0.004068,Kalanchoe_fedtshenkoi[&!color=#0000ff]:0.004455):0.269632,Amaranthus_hypochondriacus:0.272379):0.02699,(Mimulus_guttatus:0.226688,(Coffea_canephora:0.15357,Solanum_lycopersicum:0.17544)[&!rotate=true]:0.01556):0.059714):0.015471,((Glycine_max:0.190152,Betula_pendula:0.107002)[&!rotate=true]:0.017145,(Populus_trichocarpa:0.140734,(Citrus_sinensis:0.131759,(Carica_papaya:0.128966,Arabidopsis_thaliana:0.281557):0.032435):0.009787):0.013401):0.02022)[&!rotate=false]:0.007617):0.009811,Gunnera_manicata:0.183575):0.04553):0.00585):0.013305,(((Nelumbo_lutea[&!color=#ff0000]:0.020304,Nelumbo_nucifera[&!color=#ff0000]:0.012778)[&!rotate=true]:0.105968,((Macadamia_integrifolia:0.080601,Grevillea_robusta:0.132016):0.052719,Platanus_occidentalis:0.066914):0.026895):0.012105,((Sabia_swinhonei:0.019897,Sabia_emarginata[&!color=#ff0000]:0.032431)[&!rotate=true]:0.074458,(Meliosma_cunefolia[&!color=#ff0000]:0.032471,Meliosma_dillenifolia[&!color=#ff0000]:0.035428)[&!rotate=true]:0.077021):0.038057)[&!color=#000000]:0.002979):0.007676,(((Sanguinaria_canadensis:0.057112,(Eschscholzia_californica:0.120333,(Papaver_rhoeas[&!color=#ff0000]:0.023236,Papaver_somniferum[&!color=#ff0000]:0.014594):0.124179):0.013149):0.053457,((Aquilegia_coerulea:0.141878,Nandina_domestica:0.11518):0.02373,Akebia_trifoliata:0.089413):0.011102):0.006414,Euptelea_pleiosperma:0.083956):0.016275):0.046):0.035807,(Oryza_sativa[&!color=#ff0000]:0.087444,Sorghum_bicolor:0.087385):0.30956);
+	tree caml_busco = [&R] ((Sorghum_bicolor[&!color=#ff0000]:0.114304,Oryza_sativa[&!color=#ff0000]:0.106857)[&!rotate=true]:0.46018,((Liriodendron_chinense:0.147823,Persea_americana:0.193616)[&!rotate=true]:0.03467,((Euptelea_pleiosperma:0.085261,((Sanguinaria_canadensis:0.066573,(Eschscholzia_californica:0.14558,(Papaver_somniferum[&!color=#ff0000]:0.01513,Papaver_rhoeas[&!color=#ff0000]:0.019242)[&!rotate=true]:0.156042):0.012807):0.069346,((Aquilegia_coerulea:0.184229,Nandina_domestica:0.153708):0.027061,Akebia_trifoliata:0.109036):0.010429):0.007766):0.022149,(((Trochodendron_aralioides:0.030462,Tetracentron_sinense:0.047998):0.058982,(((Vitis_vinifera:0.139445,((((Kalanchoe_fedtshenkoi[&!color=#0000ff]:0.007859,Kalanchoe_laxiflora[&!color=#0000ff]:0.004751)[&!rotate=true]:0.375463,Amaranthus_hypochondriacus:0.379024):0.030716,(Mimulus_guttatus:0.292864,(Coffea_canephora:0.211032,Solanum_lycopersicum:0.237752)[&!rotate=true]:0.018044):0.078766):0.018003,((Glycine_max:0.271041,Betula_pendula:0.115592)[&!rotate=true]:0.021859,(Populus_trichocarpa:0.186914,((Arabidopsis_thaliana:0.367366,Carica_papaya:0.176277)[&!rotate=true]:0.039332,Citrus_sinensis:0.166694):0.012347):0.01688):0.027365):0.008787):0.010636,Gunnera_manicata:0.195017):0.061595,(Buxus_sinica[&!color=#ff0000]:0.022272,Buxus_sempervirens[&!color=#0000ff]:0.005284)[&!rotate=true]:0.163073):0.006796):0.015307,(((Nelumbo_nucifera[&!color=#ff0000]:0.016541,Nelumbo_lutea:0.014512):0.130236,(Platanus_occidentalis:0.06989,(Macadamia_integrifolia:0.068502,Grevillea_robusta:0.092463):0.091963):0.026655):0.016624,((Meliosma_dillenifolia[&!color=#0000ff]:0.006131,Meliosma_cunefolia:0.025388):0.110539,(Sabia_emarginata:0.008377,Sabia_swinhonei:0.008626):0.072616)[&!rotate=true]:0.047904):0.004073):0.009917):0.059052):0.041168);
+	tree castles_353 = [&R] (((((((((((((Populus_trichocarpa:0.101215,Citrus_sinensis:0.141534)[&label=0.865276]:0.054225,(Carica_papaya:0.10185,Arabidopsis_thaliana:0.261398)[&label=1.0]:0.034094)[&label=1.0]:0.034238,(Glycine_max:0.181258,Betula_pendula:0.065474)[&label=1.0]:0.022695)[&label=1.0]:0.034647,(Kalanchoe_laxiflora:0.024725,Kalanchoe_fedtshenkoi:0.023875)[&label=1.0]:0.209214)[&label=0.823066]:0.003168,(((Solanum_lycopersicum:0.17497,Coffea_canephora:0.144447)[&label=0.99341]:0.004577,Mimulus_guttatus:0.215928)[&label=1.0]:0.052393,Amaranthus_hypochondriacus:0.249863)[&label=0.998209]:0.045912)[&label=0.999989]:0.007365,Vitis_vinifera:0.045759)[&label=1.0]:0.093583,Gunnera_manicata:0.481906)[&label=1.0]:0.081958,((Trochodendron_aralioides:0.014039,Tetracentron_sinense:0.005877)[&label=1.0]:0.149519,(Buxus_sempervirens:0.015388,Buxus_sinica:0.101038)[&label=1.0]:0.179316)[&label=0.552533]:0.004627)[&label=1.0]:0.047373,((((Macadamia_integrifolia:0.047955,Grevillea_robusta:0.056638)[&label=1.0]:0.37555,Platanus_occidentalis:0.051892)[&label=1.0]:0.221927,(Nelumbo_lutea:0.050022,Nelumbo_nucifera:0.044889)[&label=1.0]:0.133954)[&label=1.0]:0.059357,((Meliosma_dillenifolia:0.173315,Meliosma_cunefolia:0.147219)[&label=1.0]:0.114012,(Sabia_swinhonei:0.270973,Sabia_emarginata:0.321027)[&label=1.0]:0.404552)[&label=1.0]:0.176366)[&label=0.990064]:0.107734)[&label=0.999943]:0.015479,(((((Papaver_somniferum:0.092727,Papaver_rhoeas:0.065406)[&label=1.0]:0.251763,Eschscholzia_californica:0.006843)[&label=0.996628]:0.081266,Sanguinaria_canadensis:0.004514)[&label=1.0]:0.070386,((Aquilegia_coerulea:0.134808,Nandina_domestica:0.136296)[&label=1.0]:0.033064,Akebia_trifoliata:0.075143)[&label=1.0]:0.023989)[&label=1.0]:0.021358,Euptelea_pleiosperma:0.113843)[&label=1.0]:0.08644)[&label=1.0]:0.060144,(Sorghum_bicolor:0.004252,Oryza_sativa:0.032212)[&label=1.0]:0.406003)[&label=0.600309]:0.009478,(Liriodendron_chinense:0.051231,Persea_americana:0.076929)[&label=1.0]:0.04133):0.0);
+	tree castles_busco = [&R] (((((((((((((Carica_papaya:0.123335,Arabidopsis_thaliana:0.333176)[&label=1.0]:0.046622,Citrus_sinensis:0.145342)[&label=0.997224]:0.003472,Populus_trichocarpa:0.166495)[&label=1.0]:0.025634,(Betula_pendula:0.091991,Glycine_max:0.247997)[&label=1.0]:0.02899)[&label=1.0]:0.037335,((((Solanum_lycopersicum:0.226571,Coffea_canephora:0.182814)[&label=0.996559]:0.002807,Mimulus_guttatus:0.256989)[&label=1.0]:0.088937,Amaranthus_hypochondriacus:0.368474)[&label=1.0]:0.002523,(Kalanchoe_laxiflora:0.067136,Kalanchoe_fedtshenkoi:0.059266)[&label=1.0]:0.39397)[&label=0.827851]:0.003296)[&label=1.0]:0.009288,Vitis_vinifera:0.113673)[&label=1.0]:0.006268,Gunnera_manicata:0.176028)[&label=1.0]:0.073317,((Buxus_sempervirens:0.037787,Buxus_sinica:0.022126)[&label=1.0]:0.162641,(Tetracentron_sinense:0.024267,Trochodendron_aralioides:0.017016)[&label=1.0]:0.061947)[&label=0.999947]:0.008412)[&label=1.0]:0.026128,((((Macadamia_integrifolia:0.01874,Grevillea_robusta:0.045762)[&label=1.0]:0.102947,Platanus_occidentalis:0.050351)[&label=1.0]:0.039579,(Nelumbo_lutea:0.040102,Nelumbo_nucifera:0.024134)[&label=1.0]:0.136466)[&label=1.0]:0.026744,((Sabia_emarginata:0.027889,Sabia_swinhonei:0.033459)[&label=1.0]:0.076456,(Meliosma_cunefolia:0.050289,Meliosma_dillenifolia:0.025747)[&label=1.0]:0.102745)[&label=1.0]:0.055016)[&label=1.0]:0.014471)[&label=1.0]:0.008854,(((((Papaver_rhoeas:0.023814,Papaver_somniferum:0.02534)[&label=1.0]:0.161091,Eschscholzia_californica:0.095488)[&label=1.0]:0.024521,Sanguinaria_canadensis:0.020791)[&label=1.0]:0.088637,((Nandina_domestica:0.108278,Aquilegia_coerulea:0.165644)[&label=1.0]:0.03933,Akebia_trifoliata:0.074538)[&label=1.0]:0.014474)[&label=1.0]:0.016225,Euptelea_pleiosperma:0.062525)[&label=1.0]:0.048815)[&label=1.0]:0.070789,(Persea_americana:0.155167,Liriodendron_chinense:0.112458)[&label=1.0]:0.057009)[&label=1.0]:0.01574,(Oryza_sativa:0.018098,Sorghum_bicolor:0.030923)[&label=1.0]:0.464093):0.0);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=2.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute="label";
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute="User selection";
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute="Fixed";
+	set nodeShapeInternal.colourAttribute="User selection";
+	set nodeShapeInternal.isShown=false;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=11.0;
+	set scaleAxis.isShown=true;
+	set scaleAxis.lineWidth=1.5;
+	set scaleAxis.majorTicks=0.025;
+	set scaleAxis.minorTicks=0.005;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=false;
+	set scaleBar.fontSize=11.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=10.0;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=12;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=true;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+
