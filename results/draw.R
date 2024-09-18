@@ -1217,7 +1217,7 @@ ggplot(aes(x=Condition,
   theme(legend.position = "none", legend.direction = "horizontal",,
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-discoqr-species-error-logerr.pdf",width=4.5,height = 3)
+ggsave("gdl-discoqr-species-error-logerr.pdf",width=4,height = 2.5)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -1233,7 +1233,7 @@ ggplot(aes(x=Condition,
   theme(legend.position = "none", legend.direction = "horizontal",
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("gdl-species-error-perrep-line.pdf",width=4.5,height = 3)
+ggsave("gdl-species-error-perrep-line.pdf",width=4,height = 2.5)
 
 pal_fill <- scales::brewer_pal(palette = "Dark2")(5)
 names(pal_fill) <-  c(LETTERS[1],LETTERS[3:5])
@@ -1259,7 +1259,8 @@ ggsave("gdl-species-error-perrep-line-main.pdf",width=4,height = 2.5)
 
 ggplot(aes(x= Condition,
            y=l.est-l.true,color=Method),
-       data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")))+
+       data=s)+
+       #data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")))+
   facet_grid(~Branch.Type+highILS)+
   geom_hline(color="grey50",linetype=1,yintercept = 0)+
   #scale_x_continuous(trans="identity",name="True length")+
@@ -1267,17 +1268,17 @@ ggplot(aes(x= Condition,
   stat_summary(fun.data = mean_sdl,position = position_dodge(width=0.75))+
   scale_x_discrete(name="Number of species")+
   #geom_boxplot(outlier.size = 0)+
-  #scale_fill_brewer(palette = "Dark2")+
-  #scale_color_brewer(palette = "Dark2",name="")+
-  scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
-  scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  #scale_fill_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
+  #scale_color_manual(values=c("#1B9E77","#7570B3","#E7298A", "#66A61E"), name="")+
   theme_bw()+
   theme(legend.position = "right", legend.direction = "horizontal",,
         legend.box.margin = margin(0), legend.margin = margin(0))+
-  guides(color=guide_legend(nrow=4, byrow=TRUE))
+  guides(color=guide_legend(nrow=5, byrow=TRUE))
 #coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.06,0.2))
 #annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
-ggsave("gdl-discoqr-species-bias-main-1row.pdf",width=12,height =2.7)
+ggsave("gdl-discoqr-species-bias-main-1row.pdf",width=10,height =2.7)
 
 
 ggplot(aes(x= Condition,
@@ -1514,20 +1515,169 @@ s = read.csv('s100.csv')
 head(s)
 unique(s$Method)
 names(s)=c("X"             ,      "Condition"         ,  "Method"        ,      "replicate"    ,       "Branch.Type"  ,
-           "l.true"      ,        "l.est")
+           "l.true"      ,        "l.est", 'AD')
 #s$Method=factor(s$Method,levels=c("CASTLES" , "CASTLES-Pro(taylor)", "CASTLES-Pro(lambert)", "CASTLES-Pro(lambert+1/s)", "CASTLES-Pro(lambert+1/2s)"))
-s$Method = factor(s$Method, levels=c("CASTLES-Pro" , "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)"))
+s$Method = factor(s$Method, levels=c("CASTLES-Pro", "CASTLES", "Concat(RAxML)", "ERaBLE", "FastME(AVG)", "TCMM", "CASLTES-Pro+TCMM")) # 
 s$Condition =  factor(s$Condition) 
 levels(s$Condition) = list("200bp" = "fasttree_genetrees_200_non", 
                            "400bp" = "fasttree_genetrees_400_non", 
                            "800bp" = "fasttree_genetrees_800_non",
                            "1600bp" = "fasttree_genetrees_1600_non",
                            "true\ngene\ntrees" = "truegenetrees")
+s$branches = 'All branches'
+# CASTLES-pro: #1b9e77 - CASTLES-pro+TCMM: #a6761d
 
 s$l.est = ifelse(s$l.est <=0, 1e-6, s$l.est)
 s$log10err = log10(s$l.est / s$l.true )
 s$abserr = abs(s$l.true - s$l.est)
 s$se = (s$l.est - s$l.true)^2 
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')),Condition+Method+replicate+branches~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~branches,ncol=2)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep_castles_pro_tcmm.pdf",width=3,height = 2.7)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')),Condition+Method+replicate+branches~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~branches,ncol=2)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-logerror_castles_pro_tcmm.pdf",width=3,height = 2.7)
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')),Condition+Method+replicate+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep_castles_pro_tcmm_broken.pdf",width=5.5,height = 2.8)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')),Condition+Method+replicate+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-logerror_castles_pro_tcmm_broken.pdf",width=5.5,height = 2.8)
+
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')))+
+  #facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  facet_wrap(~branches,ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  #stat_summary()+
+  #stat_summary(aes(group=Method),geom="line")+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.025,0.04))+
+  annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-point-castles_pro_tcmm.pdf",width=3,height =  2.7)
+
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=subset(s, Method %in% c('CASTLES-Pro', 'CASLTES-Pro+TCMM')))+
+  facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  #facet_wrap(~branches,ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  #stat_summary()+
+  #stat_summary(aes(group=Method),geom="line")+
+  scale_fill_manual(values=c("#1B9E77","#a6761d"), name="")+
+  scale_color_manual(values=c("#1B9E77","#a6761d"), name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.025,0.04))+
+  annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-point-castles_pro_tcmm_broken.pdf",width=5.5,height =  2.8)
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        axis.title = element_text(size = 12))+
+  guides(color=guide_legend(nrow=1, byrow=TRUE))
+#coord_cartesian(ylim=c(0,1),clip="off")
+ggsave("S100-legend-castles-pro-tcmm.pdf",width=10,height = 3)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -1587,6 +1737,63 @@ ggsave("S100-error-perrep-mbe.pdf",width=3.5,height = 3)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
+       data=dcast(data=subset(s),Condition+Method+replicate+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep-mbe-broken.pdf",width=5,height = 4)
+
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Condition %in% c('1600bp')),Condition+Method+replicate+AD+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  stat_summary()+
+  facet_wrap(~Branch.Type,ncol=2)+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  #coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep-mbe-ILS-broken.pdf",width=4,height = 3)
+
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=abserr,color=Method),
+       data=dcast(data=subset(s, Condition %in% c('1600bp')),Condition+Method+replicate+AD+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="Mean absolute error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  #coord_cartesian(xlim=c(1,5),clip="off")+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-error-perrep-mbe-ILS.pdf",width=3.5,height = 3)
+
+
+ggplot(aes(x=Condition,
+           y=abserr,color=Method),
        data=dcast(data=s,Condition+Method+replicate+Branch.Type~'abserr' ,value.var = "abserr",fun.aggregate = mean))+
   scale_y_continuous(trans="identity",name="Mean absolute error")+
   facet_wrap(~Branch.Type,ncol=2)+
@@ -1617,7 +1824,7 @@ ggplot(aes(x=Condition,
   scale_fill_brewer(palette = "Dark2")+
   scale_color_brewer(palette = "Dark2",name="")+
   theme_bw()+
-  theme(legend.position = "bottom", legend.direction = "horizontal",
+  theme(legend.position = "none", legend.direction = "horizontal",
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle=0))+
   guides(color=guide_legend(nrow=2, byrow=TRUE))+
@@ -1667,6 +1874,37 @@ ggplot(aes(x=Condition,
 #coord_cartesian(ylim=c(0,1),clip="off")
 ggsave("S100-logerror-perrep-mbe.pdf",width=3.5,height = 3)
 
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=log10err,color=Method),
+       data=dcast(data=subset(s, Condition %in% c('1600bp')),Condition+Method+replicate+AD+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-logerror-perrep-mbe-ILS.pdf",width=3.5,height = 3)
+
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=log10err,color=Method),
+       data=dcast(data=subset(s, Condition %in% c('1600bp')),Condition+Method+replicate+AD+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~Branch.Type,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("S100-logerror-perrep-mbe-ILS_broken.pdf",width=4,height = 3)
+
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
@@ -1685,11 +1923,55 @@ ggplot(aes(x=Condition,
         axis.title = element_text(size = 12))+
   guides(color=guide_legend(nrow=1, byrow=TRUE))
   #coord_cartesian(ylim=c(0,1),clip="off")
-  ggsave("S100-legend.pdf",width=8,height = 3)
+  ggsave("S100-legend.pdf",width=10,height = 3)
+  
+  
+  ggplot(aes(x=Condition,
+             y=log10err,color=Method),
+         data=dcast(data=s,Condition+Method+replicate+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+    scale_y_continuous(trans="identity",name="Mean log10 error")+
+    facet_wrap(~Branch.Type,ncol=2)+
+    #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+    #stat_summary(position = position_dodge(width=0.86))+
+    #geom_boxplot(outlier.size = 0)+
+    stat_summary()+
+    stat_summary(aes(group=Method),geom="line")+
+    #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+    #stat_summary(position = position_dodge(width=0.86))+
+    scale_fill_brewer(palette = "Dark2")+
+    scale_color_brewer(palette = "Dark2",name="")+
+    theme_bw()+
+    theme(legend.position = "none", legend.direction = "horizontal",
+          axis.title.x = element_blank(),
+          axis.text.x = element_text(angle=0))+
+    guides(color=guide_legend(nrow=2, byrow=TRUE))
+  #coord_cartesian(ylim=c(0,1),clip="off")
+  ggsave("S100-logerror-perrep-mbe-broken.pdf",width=5,height = 4)
+  
+  ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  #stat_summary(position = position_dodge(width=0.86))+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+#coord_cartesian(ylim=c(0,1),clip="off")
+ggsave("S100-logerror-perrep-mbe.pdf",width=3.5,height = 3)
 
 ggplot(aes(x=Condition,
            y=log10err,color=Method),
-       data=dcast(data=s,Condition+Method+replicate+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+       data=dcast(data=s,Condition+Method+Branch.Type~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   facet_wrap(~Branch.Type,ncol=2)+
   #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
@@ -1773,6 +2055,80 @@ ggplot(aes(x= Condition,
   coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.025,0.04))+
   annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
 ggsave("S100-bias-point-mbe.pdf",width=3.5,height =  3)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=s)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.003,0.018))
+  #annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-line-mbe.pdf",width=3.5,height =  3)
+
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=l.est-l.true,color=Method),
+       data=subset(s, Condition %in% c('1600bp')))+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))
+#coord_cartesian(ylim=c(-0.003,0.018))
+#annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-line-mbe-ILS.pdf",width=3.5,height =  3)
+
+ggplot(aes(x=cut(AD,c(30,40,50,60)/100),
+           y=l.est-l.true,color=Method),
+       data=subset(s, Condition %in% c('1600bp')))+
+  facet_wrap(~Branch.Type,ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))
+  #coord_cartesian(ylim=c(-0.003,0.018))
+#annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-line-mbe-ILS-broken.pdf",width=4,height =  3)
+
+ggplot(aes(x= Condition,
+           y=l.est-l.true,color=Method),
+       data=s)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  facet_wrap(~Branch.Type,ncol=2)+
+  scale_y_continuous(name=expression("Estimated" - "true length (bias)"))+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_bw()+
+  theme(legend.position = "none", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  coord_cartesian(xlim=c(1,5),clip="off",ylim=c(-0.003,0.03))
+#annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
+ggsave("S100-bias-line-mbe-broken.pdf",width=5,height =  4)
 
 ggplot(aes(x= Condition,
            y=l.est-l.true,color=Method),
