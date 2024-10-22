@@ -2,7 +2,7 @@
 
 This repository contains the datasets and scripts used in the following paper:
 
-- Y. Tabatabaee, C. Zhang, S. Mirarab, Species tree branch length estimation despite incomplete lineage sorting, duplication, and loss
+- Y. Tabatabaee, C. Zhang, S. Mirarab (2024). Species tree branch length estimation despite incomplete lineage sorting, duplication, and loss
 
 For experiments in this study, we analyzed three sets of simulated datasets and nine biological dataset with different sources of gene tree discordance (details below). All datasets can be accessed from [this](https://drive.google.com/drive/folders/1xrDjxkSSnbcvUVW_QcaUS8-mou1sJyww?usp=sharing) Google Drive link. In all simulated datasets, the true species trees have branch lengths in substitution-units. 
 
@@ -25,7 +25,7 @@ For experiments in this study, we analyzed three sets of simulated datasets and 
 - **Mammals**: 37-taxon dataset from [Song et al. (2012)](https://www.pnas.org/doi/10.1073/pnas.1211733109) with 424 single-copy genes.
 #### GDL
 - **Fungi**: 16-taxon dataset from [Butler et al. (2009)](https://www.nature.com/articles/nature08064) with 706 single-copy genes and 7,180 multi-copy genes.
-- **Plants**: 83-taxon dataset from [Wickett et al. (2014)](https://www.pnas.org/doi/10.1073/pnas.1323926111) with 424 single-copy genes and 9,610 multi-copy genes.
+- **Plants**: 80-taxon dataset from [Wickett et al. (2014)](https://www.pnas.org/doi/10.1073/pnas.1323926111) with 424 single-copy genes and 9,610 multi-copy genes.
 - **Eudicots**: 40-taxon dataset from [Chanderbali et al. (2022)](https://www.nature.com/articles/s41467-022-28312-w) with 345 single-copy genes and 2,573 multi-copy genes.
 #### HGT
 - **Bacterial (core genes)**: 72-taxon dataset from [Williams et al. (2020)](https://www.nature.com/articles/s41559-019-1040-x) with 49 single-copy genes.
