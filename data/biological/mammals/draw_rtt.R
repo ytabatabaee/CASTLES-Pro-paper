@@ -44,3 +44,17 @@ ggplot(aes(x=l1,y=l2,color=Branch.Type),data=corr)+
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ggsave("mammals_corr_r.pdf",width=4,height = 3.5)
 
+ggplot(aes(x=l1,y=l2,color=Branch.Type,shape=Gene.trees,linetype=Gene.trees),data=corr[corr$l1 > 0 & corr$l2 > 0,])+
+  geom_point(alpha=0.7)+
+  scale_x_continuous(trans="log10",name="CASTLES-Pro length")+
+  scale_y_continuous(trans="log10",name="CAML length")+
+  stat_smooth(se=F,method="glm",formula=y ~ poly(x, 2))+
+  scale_color_brewer(palette = "Dark2")+
+  geom_abline(color="black",linetype=2)+
+  coord_cartesian(xlim=c(10^-3.5,0.15),ylim=c(10^-3.5,0.15))+
+  theme_classic()+
+  theme(legend.position = c(.2,.8)) + 
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+ggsave("mammals_corr_r_treeshrink.pdf",width=4,height = 3.5)
+
+
