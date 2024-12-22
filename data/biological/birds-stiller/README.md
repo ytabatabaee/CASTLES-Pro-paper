@@ -1,0 +1,2 @@
+- ASTRAL species tree with SU branch lengths estimated using concatenation: [./stiller_concat.rooted.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/birds-stiller/stiller_concat.rooted.tre)
+- ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./stiller_castles_pro.rooted.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/birds-stiller/stiller_castles_pro.rooted.tre)

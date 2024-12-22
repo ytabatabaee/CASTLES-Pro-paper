@@ -1,0 +1,3 @@
+- MrBayes species tree with SU branch lengths: [./mrbayes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/mrbayes.tre)
+- ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_pep.ml.renamed.trees](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/castles_pro_pep.ml.renamed.trees)
+- Multi-copy gene trees with SU branch lengths [./pep.ml.renamed.trees](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/pep.ml.renamed.trees)

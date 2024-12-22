@@ -1,0 +1,3 @@
+- ASTRAL species tree with SU branch lengths estimated using concatenation: [./caml_core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/caml_core_genes.tre)
+- ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/castles_pro_core_genes.tre)
+- Gene trees with SU branch lengths [./core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/core_genes.tre)

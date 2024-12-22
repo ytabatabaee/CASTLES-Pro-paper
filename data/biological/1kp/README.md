@@ -1,0 +1,3 @@
+- Concatenation species tree with SU branch lengths: [./caml.tre.induced](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/caml.tre.induced)
+- ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castlespro_mul.tre.induced](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/castlespro_mul.tre.induced)
+- Multi-copy gene trees with SU branch lengths [./mul.trees.renamed](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/mul.trees.renamed)

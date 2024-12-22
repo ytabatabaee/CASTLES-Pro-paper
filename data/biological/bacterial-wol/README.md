@@ -1,0 +1,2 @@
+- ASTRAL species trees with SU branch lengths estimated using concatenation: [./astral.rand.lpp.nwk](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-wol/astral.rand.lpp.nwk)
+- ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_wol.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-wol/castles_pro_wol.tre)
