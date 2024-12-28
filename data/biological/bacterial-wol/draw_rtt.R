@@ -22,11 +22,11 @@ ggplot(r, aes(x=rtt, color=method, fill=method)) +
   scale_y_continuous(name="Density" )+
   geom_vline(data=mu, aes(xintercept=grp.mean, color=method),
              linetype="dashed")+
-  geom_text(aes(color="CASTLES-Pro",y=3,x=1.640,label="avg.=1.640\nmax=2.405"),size=2.7)+
-  geom_text(aes(color="CAML",y=4,x=1.354,label="avg.=1.354\nmax=1.545"),size=2.7)+
+  geom_text(aes(color="CASTLES-Pro",y=1,x=4.921,label="avg.=4.921\nmax=15.613"),size=2.7)+
+  geom_text(aes(color="CAML",y=1.7,x=1.775,label="avg.=1.775\nmax=3.229"),size=2.7)+
   theme(legend.position = c(.8,1), legend.direction = "vertical")
   #guides(color=guide_legend(nrow=2, byrow=TRUE))
-ggsave("rtt_core.pdf",width=4,height=3.5)
+ggsave("rtt_wol.pdf",width=4,height=3.5)
 
 corr=read.csv('wol_corr.csv')
 
