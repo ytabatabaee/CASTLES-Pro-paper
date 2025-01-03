@@ -1,2 +1,5 @@
+- 10,575-taxon dataset with 381 single-copy genes.
+- Publication: [Zhu et al. (2019)](https://www.nature.com/articles/s41467-019-13443-4)
+- Original dataset: https://biocore.github.io/wol/
 - ASTRAL species trees with SU branch lengths estimated using concatenation: [./astral.rand.lpp.nwk](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-wol/astral.rand.lpp.nwk)
 - ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_wol.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-wol/castles_pro_wol.tre)

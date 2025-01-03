@@ -1,3 +1,6 @@
+- 80-taxon dataset with 424 single-copy genes and 9,610 multi-copy genes.
+- Publication: [Wickett et al. (2014)](https://www.pnas.org/doi/10.1073/pnas.1323926111)
+- Original dataset: https://datacommons.cyverse.org/browse/iplant/home/shared/onekp_pilot
 - Concatenation species tree with SU branch lengths: [./caml.tre.induced](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/caml.tre.induced)
 - ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castlespro_mul.tre.induced](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/castlespro_mul.tre.induced)
 - Multi-copy gene trees with SU branch lengths [./mul.trees.renamed](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/1kp/mul.trees.renamed)

@@ -1,3 +1,6 @@
+- 72-taxon dataset with 49 single-copy genes
+- Publication: [Williams et al. (2020)](https://www.nature.com/articles/s41559-019-1040-x)
+- Original dataset: https://doi.org/10.6084/m9.figshare.13395470
 - ASTRAL species tree with SU branch lengths estimated using concatenation: [./caml_core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/caml_core_genes.tre)
 - ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/castles_pro_core_genes.tre)
 - Gene trees with SU branch lengths [./core_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-core/core_genes.tre)

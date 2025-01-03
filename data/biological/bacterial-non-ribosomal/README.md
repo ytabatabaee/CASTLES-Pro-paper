@@ -1,3 +1,6 @@
+- 108-taxon dataset with 38 single-copy genes.
+- Publication: [Petitjean et al. (2015)](https://pubmed.ncbi.nlm.nih.gov/25527841/)
+- Original dataset: https://doi.org/10.6084/m9.figshare.13395470
 - ASTRAL species tree with SU branch lengths estimated using concatenation: [./caml_non_ribosomal_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-non-ribosomal/caml_non_ribosomal_genes.tre)
 - ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_non_ribosomal.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-non-ribosomal/castles_pro_non_ribosomal.tre)
 - Gene trees with SU branch lengths [./non_ribosomal_genes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/bacterial-non-ribosomal/non_ribosomal_genes.tre)
