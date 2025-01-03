@@ -1,0 +1,6 @@
+- 40-taxon dataset with 345 single-copy genes and 2,573 multi-copy genes.
+- Publication: [Chanderbali et al. (2022)](https://www.nature.com/articles/s41467-022-28312-w)
+- Original dataset: https://datadryad.org/stash/dataset/doi:10.5061/dryad.cjsxksn6d
+- Main concatenation species tree with SU branch lengths: [./caml_353_no_outgroup.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/buxus/caml_353_no_outgroup.tre)
+- ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_mul_2573_no_outgroup.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/buxus/castles_pro_mul_2573_no_outgroup.tre)
+- Multi-copy gene trees with SU branch lengths [./orthogroups_2573_clean.trees](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/buxus/orthogroups_2573_clean.trees)

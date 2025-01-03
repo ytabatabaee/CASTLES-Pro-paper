@@ -1,2 +1,5 @@
+- 363-taxon dataset with 63,430 single-copy genes.
+- Publication: [Stiller et al. (2024)](https://www.nature.com/articles/s41586-024-07323-1)
+- Original dataset: https://erda.ku.dk/archives/341f72708302f1d0c461ad616e783b86/published-archive.html
 - ASTRAL species tree with SU branch lengths estimated using concatenation: [./stiller_concat.rooted.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/birds-stiller/stiller_concat.rooted.tre)
 - ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro: [./stiller_castles_pro.rooted.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/birds-stiller/stiller_castles_pro.rooted.tre)

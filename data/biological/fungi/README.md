@@ -1,3 +1,6 @@
+- 16-taxon dataset with 706 single-copy genes and 7,180 multi-copy genes.
+- Publication: [Butler et al. (2009)](https://www.nature.com/articles/nature08064)
+- Original dataset: https://compbio.mit.edu/candida/
 - MrBayes species tree with SU branch lengths: [./mrbayes.tre](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/mrbayes.tre)
 - ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro: [./castles_pro_pep.ml.renamed.trees](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/castles_pro_pep.ml.renamed.trees)
 - Multi-copy gene trees with SU branch lengths [./pep.ml.renamed.trees](https://github.com/ytabatabaee/CASTLES-Pro-paper/blob/main/data/biological/fungi/pep.ml.renamed.trees)
