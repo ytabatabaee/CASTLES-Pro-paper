@@ -6,7 +6,7 @@ import numpy as np
 from itertools import combinations
 
 
-def convert_to_unit_tree(args):
+def compute_rtt(args):
     tns = dendropy.TaxonNamespace()
     t1 = dendropy.Tree.get(path=args.tree, schema='newick', taxon_namespace=tns, rooting='force-rooted')
     tree_height = 0
@@ -41,4 +41,4 @@ if __name__ == "__main__":
     parser.add_argument("-m", "--method", type=str,  required=True,
                         help="method name")
     args = parser.parse_args()
-    convert_to_unit_tree(args)
+    compute_rtt(args)
