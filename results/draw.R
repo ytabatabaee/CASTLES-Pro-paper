@@ -387,6 +387,25 @@ ggplot(aes(x=Condition,y=log10err,color=Method),
 ggsave("gdl-estgt-error-logabs-seqlen.pdf",width=3,height = 3.5)
 
 ggplot(aes(x=duploss,y=log10err,color=Method),
+       data=dcast(data=s,duprate+duploss+Method+replicate+ils~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  scale_x_discrete(name="Loss/Dup ratio")+
+  facet_nested(~ils+duprate)+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #stat_summary(position = position_dodge(width=0.86))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_classic()+
+  theme(legend.position =  "none", legend.direction = "horizontal",
+        legend.box.margin = margin(0), legend.margin = margin(0))+
+  guides(color=guide_legend(nrow=2,  byrow=TRUE),
+         fill=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-estgt-error-logabs-overall-main.pdf",width=5,height = 2.5)
+
+ggplot(aes(x=duploss,y=log10err,color=Method),
        data=dcast(data=subset(s, Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),duprate+duploss+Method+replicate+ils~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   scale_x_discrete(name="Loss/Dup ratio")+
@@ -1066,6 +1085,22 @@ ggsave("gdl-discoqr-dup-error-logerr.pdf",width=7,height = 3.1)
 
 ggplot(aes(x=duprate,
            y=log10err,color=Method),
+       data=dcast(data=subset(s, duprate %in% c("1e-10", "5e-10", "1e-9")),duprate+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_wrap(~highILS,ncol=2)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Duplication rate")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_classic()+
+  theme(legend.position = "none", legend.direction = "horizontal",,
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=1, byrow=TRUE))
+ggsave("gdl-discoqr-dup-error-logerr-main.pdf",width=4,height = 2.5)
+
+ggplot(aes(x=duprate,
+           y=log10err,color=Method),
        data=dcast(data=subset(s, duprate %in% c("1e-10", "5e-10", "1e-9") & Method %in% c("CASTLES-Pro", "CA-DISCO(RAxML)", "ERaBLE-DISCO", "FastME(AVG)-DISCO")),duprate+Method+replicate+highILS~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
   scale_y_continuous(trans="identity",name="Mean log10 error")+
   facet_wrap(~highILS,ncol=2)+
@@ -1443,6 +1478,22 @@ s$log10err = log10(s$l.est / s$l.true )
 s$abserr = abs(s$l.true - s$l.est)
 s$se = (s$l.est - s$l.true)^2 
 s$duprate = '5e-10, Low ILS, 100 taxa'
+
+ggplot(aes(x=Condition,
+           y=log10err,color=Method),
+       data=dcast(data=s,Condition+Method+replicate+duprate~'log10err' ,value.var = "log10err",fun.aggregate = function(x) mean(abs(x))))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  facet_grid(~duprate)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  scale_x_discrete(name="Sequence length")+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2",name="")+
+  theme_classic()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",,
+        axis.text.x = element_text(angle=0))+
+  guides(color=guide_legend(nrow=2, byrow=TRUE))
+ggsave("gdl-seqlen-error-logerr.pdf",width=2.2,height = 2.5)
 
 
 ggplot(aes(x=Condition,
