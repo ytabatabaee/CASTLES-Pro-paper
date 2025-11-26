@@ -2,7 +2,7 @@
 
 This repository contains the datasets and scripts used in the following paper:
 
-- Y. Tabatabaee, C. Zhang, S. Arasti, S. Mirarab (2025). Species tree branch length estimation despite incomplete lineage sorting, duplication, and loss. Genome Biology and Evolution (in press). https://www.biorxiv.org/content/10.1101/2025.02.20.639320v1.abstract
+- Y. Tabatabaee, C. Zhang, S. Arasti, S. Mirarab (2025). Species tree branch length estimation despite incomplete lineage sorting, duplication, and loss. Genome Biology and Evolution. Volume 17, Issue 11. https://academic.oup.com/gbe/article/17/11/evaf200/8343050
 
 For experiments in this study, we analyzed three sets of simulated datasets and nine biological datasets with different sources of gene tree discordance (details below). All datasets can be accessed from [this](https://drive.google.com/drive/folders/1xrDjxkSSnbcvUVW_QcaUS8-mou1sJyww?usp=sharing) Google Drive link. In all simulated datasets, the true species trees have branch lengths in substitution-units.
 
@@ -53,9 +53,26 @@ We generated a new 50-taxon HGT+ILS dataset based on the parameters from [Davids
 
 
 **GDL+ILS simulations**
-- We updated the GDL+ILS dataset from [Willson et. al. (2022, 2023)](https://academic.oup.com/sysbio/article/71/3/610/6358739) with species trees with substitution-unit branch lengths. The original datasets are available at [https://databank.illinois.edu/datasets/IDB-4050038](https://databank.illinois.edu/datasets/IDB-4050038) and  [https://databank.illinois.edu/datasets/IDB-5748609](https://databank.illinois.edu/datasets/IDB-5748609).  Results and intermediate data from the experiments in the paper are available [here](https://drive.google.com/drive/folders/1xrDjxkSSnbcvUVW_QcaUS8-mou1sJyww?usp=sharing).
 
-### Biological dataset
+We updated the GDL+ILS dataset from [Willson et. al. (2022, 2023)](https://academic.oup.com/sysbio/article/71/3/610/6358739) to produce species trees with substitution-unit branch lengths. The model conditions of this dataset are represented as `[num-taxa]_gdl_[GDL-rate]_[dup/loss-ratio]_[high/low-ILS]`. The `default` model condition has 100 taxa, GDL rate of 10^-10 with equal loss rate. The number of genes varies between 50-1000, with the exception of the model condition `gtrees_10000_l1` that has up to 10,000 genes. The number of species varies between 20 to 1000 (for the `species_1000` model condition). The original datasets (including the sequence alignments) are available at [https://databank.illinois.edu/datasets/IDB-4050038](https://databank.illinois.edu/datasets/IDB-4050038) and  [https://databank.illinois.edu/datasets/IDB-5748609](https://databank.illinois.edu/datasets/IDB-5748609).  Results and intermediate data from the experiments in the paper are available in `GDL_SU.tar.xz`. Below is a description of files in each directory.
+
+- `s_tree.trees`: true species tree in substitution units
+- `s_tree.ralpha`: mutation rates for species tree branches in pre-order traversal
+- `g_trees_ralpha.txt`: mutation rates for gene tree branches in pre-order traversal
+- `truegenetrees`: true gene trees in substitution units
+- `g_[seq-len].trees.[num-genes]`: `num-genes` gene family trees estimated from `seq-len` sequence alignments
+- `erable_patristic_all_disco_g_[seq-len].trees.[num-genes]_s_tree.trees.derooted.length.nwk`: true species tree furnished with ERaBLE SU branch lengths on DISCO decomposed gene trees
+- `patristic_[MODE]_disco_g_[seq-len].trees.[num-genes].mat`: patristic distance matrix calculated using average (`avg`) or all (`all`) pairwise distances for DISCO decomposed estimated gene trees
+- `concat_g_[seq-len].[num-genes]`: concatenation of `num-genes` gene sequence alignments with length `seq-len`
+- `disco_g_[seq-len].trees.[num-genes]`: single-copy DISCO decomposed gene trees estimated from `g_[seq-len].trees.[num-genes]` gene family trees
+- `RAxML_result.concat_g_[seq-len].[num-genes]_s_tree.trees`: true species tree furnished with CA-DISCO (with RAxML) SU branch lengths
+- `castles-original_disco_g_[seq-len].trees_s_tree.trees`: true species tree furnished with CASTLES-DISCO SU branch lengths run on gene trees estimated from `seq-len` sequence alignments
+- `castlespro_g_[seq-len].trees.[num-genes]_s_tree.trees`: true species tree furnished with CASTLES-Pro SU branch lengths run on gene trees estimated from `seq-len` sequence alignments
+- `fastme_BalLS_patristic_avg_disco_g_[seq-len].trees.[num-genes]_s_tree.trees.derooted`: true species tree furnished with FastME SU branch lengths with average distances run on DISCO decomposed estimated gene trees
+
+### Biological datasets
+We analyzed three biological datasets where ILS is the primary source of gene tree discordance, three datasets with GDL, and three bacterial datasets with high rates of HGT. The results of all experiments are provided in `biological.tar.xz`.
+
 #### ILS
 - **Brids**: 363-taxon dataset from [Stiller et al. (2024)](https://www.nature.com/articles/s41586-024-07323-1) with 63,430 single-copy genes.
 - **Bees**: 32-taxon dataset from [Bossert et al. (2021)](https://academic.oup.com/sysbio/article/70/4/803/6050959) with 853 single-copy genes.
