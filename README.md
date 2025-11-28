@@ -107,6 +107,7 @@ Below is a description of files in each directory.
   - `caml_no_outgroup.tre`: ASTRAL species tree with SU branch lengths estimated using concatenation.
   - `castles_pro_no_outgroup.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
   - `castles_pro_treeshrink_no_outgroup.tre`: CASTLES-Pro tree estimated from TreeShrink gene trees.
+  
 #### GDL
 - **Fungi**: 16-taxon dataset from [Butler et al. (2009)](https://www.nature.com/articles/nature08064) with 706 single-copy genes and 7,180 multi-copy genes.
   - Original dataset: https://compbio.mit.edu/candida/
@@ -122,7 +123,36 @@ Below is a description of files in each directory.
   - `castlespro_mul.tre.induced`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
   - `mul.trees.renamed`: Multi-copy gene trees with SU branch lengths.
 - **Eudicots (`buxus`)**: 40-taxon dataset from [Chanderbali et al. (2022)](https://www.nature.com/articles/s41467-022-28312-w) with 345 single-copy genes and 2,573 multi-copy genes.
+  - Original dataset: https://datadryad.org/stash/dataset/doi:10.5061/dryad.cjsxksn6d
+  - `caml_353_no_outgroup.tre`: Main concatenation species tree with SU branch lengths.
+  - `castles_pro_mul_2573_no_outgroup.tre`: ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro.
+  - `castles_pro_353_no_outgroup.tre`: ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro using 353 single-copy gene trees.
+  - `castles_pro_busco_no_outgroup.tre`: ASTRAL-Pro species tree with SU branch lengths estimated using CASTLES-Pro using BUSCO gene trees.
+  - `orthogroups_2573_clean.trees`: Multi-copy gene trees with SU branch lengths.
+  - `sc_353.trees`: Single-copy gene trees with SU branch lengths.
+  - `Busco_1246.trees`: BUSCO gene trees.
+  - `buxus.nexus`: Comparison between CASTLES-Pro and concatenation branch lengths. 
+    
 #### HGT
 - **Bacterial (core genes)**: 72-taxon dataset from [Williams et al. (2020)](https://www.nature.com/articles/s41559-019-1040-x) with 49 single-copy genes.
+  - Original dataset: https://doi.org/10.6084/m9.figshare.13395470
+  - `astral_core_genes.tre`: ASTRAL species tree estimated using the core gene trees.
+  - `caml_core_genes.tre`: ASTRAL species tree with SU branch lengths estimated using concatenation.
+  - `castles_pro_core_genes.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
+  - `core_genes.tre`: Gene trees with SU branch lengths.
+  - `core.nexus`: Comparison between CASTLES-Pro and concatenation branch lengths. 
 - **Bacterial (non-ribosomal genes)**: 108-taxon dataset from [Petitjean et al. (2015)](https://pubmed.ncbi.nlm.nih.gov/25527841/) with 38 single-copy genes.
+  - Original dataset: https://doi.org/10.6084/m9.figshare.13395470
+  - `astral_non_ribosomal_genes.tre`: ASTRAL species tree estimated on non-ribosomal gene trees.
+  - `caml_non_ribosomal_genes.tre`: ASTRAL species tree with SU branch lengths estimated using concatenation.
+  - `castles_pro_non_ribosomal.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
+  - `non_ribosomal_genes.tre`: Gene trees with SU branch lengths.
+  - `non_ribosomal.nexus`: Comparison between CASTLES-Pro and concatenation branch lengths.
 - **Bacterial (WoL)**: 10,575-taxon dataset from [Zhu et al. (2019)](https://www.nature.com/articles/s41467-019-13443-4) with 381 single-copy genes.
+  - Original dataset: https://biocore.github.io/wol/
+  - `astral.rand.lpp.nwk`: ASTRAL species trees with SU branch lengths estimated using concatenation.
+  - `castles_pro_wol.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
+  - `wol_genestrees.tre.zip`: WoL gene trees.
+  - `wol.nexus`: Comparison between CASTLES-Pro and concatenation branch lengths.
+  - `aster_v1.13.2.4_wol.annotated.nwk`: ASTER annotation of ASTRAL species tree for branch length estimation.
+  - `castles_pro_wol_treeshrink.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro using TreeShrink gene trees.
