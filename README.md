@@ -79,9 +79,20 @@ Below is a description of files in each directory.
 ### Biological datasets
 We analyzed three biological datasets where ILS is the primary source of gene tree discordance, three datasets with GDL, and three bacterial datasets with high rates of HGT. The results of all experiments are provided in `biological.tar.xz`.
 
-Below is a description of files in each directory.
+The following files appear in all subdirectories, where `[DATASET-NAME]` indicates the name of the dataset.
 
-#### ILS
+- `draw_rtt.R`: script for drawing the Root-to-tip (RTT) distance distribution plots and branch length correlation plots.
+- `caml_rtt.csv`: Root-to-tip (RTT) distance values for CAML.
+- `castles_pro_rtt.csv`:  Root-to-tip (RTT) distance values for CASTLES-Pro.
+- `rtt_[DATASET-NAME].pdf`: Root-to-tip (RTT) distance plot for CAML and CASTLES-Pro.
+- `[DATASET-NAME]_corr.csv`: Correlation between CAML and CASTLES-Pro branch lengths.
+- `[DATASET-NAME]_corr_r.pdf`: Plot showing correlation between CAML and CASTLES-Pro branch lengths.
+- `[DATASET-NAME]_caml.pdf`: Plot showing the CAML tree.
+- `[DATASET-NAME]_castles_pro.pdf`: Plot showing the CASTLES-Pro tree.
+
+Below is a description of other files in each directory.
+
+#### ILS datasets
 - **Brids**: 363-taxon dataset from [Stiller et al. (2024)](https://www.nature.com/articles/s41586-024-07323-1) with 63,430 single-copy genes.
   - Original dataset: https://erda.ku.dk/archives/341f72708302f1d0c461ad616e783b86/published-archive.html
   - `stiller_concat.rooted.tre`: ASTRAL species tree with SU branch lengths estimated using concatenation.
@@ -108,7 +119,7 @@ Below is a description of files in each directory.
   - `castles_pro_no_outgroup.tre`: ASTRAL species tree with SU branch lengths estimated using CASTLES-Pro.
   - `castles_pro_treeshrink_no_outgroup.tre`: CASTLES-Pro tree estimated from TreeShrink gene trees.
   
-#### GDL
+#### GDL datasets
 - **Fungi**: 16-taxon dataset from [Butler et al. (2009)](https://www.nature.com/articles/nature08064) with 706 single-copy genes and 7,180 multi-copy genes.
   - Original dataset: https://compbio.mit.edu/candida/
   - `mrbayes.tre`: MrBayes species tree with SU branch lengths.
@@ -133,7 +144,7 @@ Below is a description of files in each directory.
   - `Busco_1246.trees`: BUSCO gene trees.
   - `buxus.nexus`: Comparison between CASTLES-Pro and concatenation branch lengths. 
     
-#### HGT
+#### HGT datasets
 - **Bacterial (core genes)**: 72-taxon dataset from [Williams et al. (2020)](https://www.nature.com/articles/s41559-019-1040-x) with 49 single-copy genes.
   - Original dataset: https://doi.org/10.6084/m9.figshare.13395470
   - `astral_core_genes.tre`: ASTRAL species tree estimated using the core gene trees.
