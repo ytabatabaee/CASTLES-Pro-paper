@@ -4,7 +4,7 @@ This repository contains the datasets and scripts used in the following paper:
 
 - Y. Tabatabaee, C. Zhang, S. Arasti, S. Mirarab (2025). Species tree branch length estimation despite incomplete lineage sorting, duplication, and loss. Genome Biology and Evolution. Volume 17, Issue 11. https://academic.oup.com/gbe/article/17/11/evaf200/8343050
 
-For experiments in this study, we analyzed three sets of simulated datasets and nine biological datasets with different sources of gene tree discordance (details below). All datasets can be accessed from [this](https://drive.google.com/drive/folders/1xrDjxkSSnbcvUVW_QcaUS8-mou1sJyww?usp=sharing) Google Drive link. In all simulated datasets, the true species trees have branch lengths in substitution-units.
+For experiments in this study, we analyzed three sets of simulated datasets and nine biological datasets with different sources of gene tree discordance. In all simulated datasets, the true species trees have branch lengths in substitution-units. All datasets can be accessed from Dryad https://doi.org/10.5061/dryad.70rxwdcc8.
 
 ### Simulated datasets
 
